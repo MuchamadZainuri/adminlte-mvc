@@ -16,12 +16,17 @@ class Prodi
         return $stmt->fetchAll();
     }
 
-    public function show($id) {}
+    public function show($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM prodi WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
 
     public function create($data)
     {
         $stmt = $this->pdo->prepare("INSERT INTO prodi (kode,nama,kaprodi) VALUES (?,?,?)");
-        return $stmt->execute([$data['kode'], $data['nama'], $data['kapordi']]);
+        return $stmt->execute([$data['kode'], $data['nama'], $data['kaprodi']]);
     }
 
     public function update($id, $data)
